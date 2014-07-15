@@ -47,7 +47,7 @@ foreach ($modbasevals as &$modtable)
 	foreach ($tablekeys as $key)
 		{	
 
-			if ( $key == 'Base_ID'|| $key =='Last_Updated')
+			if ( $key == 'Base_ID' || $key =='Last_Updated')
 			{
 				$insert = $modtable[$key];
 			}

@@ -3,8 +3,30 @@
 include '../dblogin.php';
 
 
-
+$unset = 0;
 include 'form.html.php';
+if (!empty($_POST))
+{
+	foreach($_POST as $p)
+	{
+		if (empty($p))
+		{
+			$unset = 1;
+		}
+	}	
+}
+
+if ($unset == 0)
+{
+	$sql = 'INSERT INTO sales.base_value SET ';
+
+	foreach ($tablekeys as $key)
+		{	
+
+			if ( $key !== 'Base_ID'|| $key !=='definition_ID' || $key !=='Last_Updated' || $key !== 'Bandwidth_Mbps')
+			{
+				$sql .= $key.'= :'.$key.', '
+			}
 
 /*$IDcheck = 0;
 if (isset($_POST['internet_bandwidth']))
