@@ -1,12 +1,12 @@
 <?php
 mb_internal_encoding("UTF-8");
-function Tablegenerate ()
+function tablegenerate ()
 {	$bwidths = array(10,20,30,40,50,100);
 	$margins = array('Low Margin', 'Medium Margin', 'High Margin');
 	$years = array(1,2,3,4,5);
 
 	echo 
-	'<table><tr>
+	'<br><br><br><table id = "entryfield" class = "0martable"><tr>
 	<th class = "side">Supplier</th>
 	<th class = "ttb" colspan = "3">TalkTalk Business</th>
 	<th class = "bt" colspan = "3">BT 21CN Etherway</th>
@@ -100,33 +100,33 @@ function Tablegenerate ()
 			//onblur = "formsub()"
 		echo '<tr>
 			<th class = "side">'.$b.'</th>
-			<td>£<input type = "text" class = "inputtext" name = "ttbann'.$b.'" id = "ttbann'.$b.'" value = "'.$ttbann.'"></td>
-			<td>£<input type = "text" class = "inputtext" name = "ttb1yr'.$b.'" id = "ttb1yr'.$b.'" value = "'.$ttb1yr.'"></td>
-			<td>£<input type = "text" class = "inputtext" name = "ttb3yr'.$b.'" id = "ttb3yr'.$b.'" value = "'.$ttb3yr.'"></td>
-			<td>£<input type = "text" class = "inputtext" name = "wayann'.$b.'" id = "wayann'.$b.'" value = "'.$wayann.'"></td>
-			<td>£<input type = "text" class = "inputtext" name = "way1yr'.$b.'" id = "way1yr'.$b.'" value = "'.$way1yr.'"></td>
-			<td>£<input type = "text" class = "inputtext" name = "way3yr'.$b.'" id = "way3yr'.$b.'" value = "'.$way3yr.'"></td>
-			<td>£<input type = "text" class = "inputtext" name = "btsann'.$b.'" id = "btsann'.$b.'" value = "'.$btsann.'" onblur = "ewayadd()"></td>
-			<td class = "btsi1" >£<label id = "btstot'.$b.'">'.$btstot.'</label></input></td>
-			<td>£<input type = "text" class = "inputtext" name = "btpann'.$b.'" id = "btpann'.$b.'" value = "'.$btpann.'" onblur = "ewayadd()"></td>
-			<td class = "btsi1" >£<label  id = "btptot'.$b.'">'.$btptot.'</label></td>	
-			<td>£<input type = "text" class = "inputtext" name = "eadann'.$b.'" id = "eadann'.$b.'" value = "'.$eadann.'"></td>				
-			<td>£<input type = "text" class = "inputtext" name = "eadins'.$b.'" id = "eadins'.$b.'" value = "'.$eadins.'"></td></tr>';
+			<td>&pound<input type = "text" class = "inputtext" name = "ttbann'.$b.'" id = "ttbann'.$b.'" value = "'.$ttbann.'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "ttb1yr'.$b.'" id = "ttb1yr'.$b.'" value = "'.$ttb1yr.'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "ttb3yr'.$b.'" id = "ttb3yr'.$b.'" value = "'.$ttb3yr.'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "wayann'.$b.'" id = "wayann'.$b.'" value = "'.$wayann.'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "way1yr'.$b.'" id = "way1yr'.$b.'" value = "'.$way1yr.'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "way3yr'.$b.'" id = "way3yr'.$b.'" value = "'.$way3yr.'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "btsann'.$b.'" id = "btsann'.$b.'" value = "'.$btsann.'" onblur = "ewayadd()"></td>
+			<td class = "btsi1" >&pound<label id = "btstot'.$b.'">'.$btstot.'</label></input></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "btpann'.$b.'" id = "btpann'.$b.'" value = "'.$btpann.'" onblur = "ewayadd()"></td>
+			<td class = "btsi1" >&pound<label  id = "btptot'.$b.'">'.$btptot.'</label></td>	
+			<td>&pound<input type = "text" class = "inputtext" name = "eadann'.$b.'" id = "eadann'.$b.'" value = "'.$eadann.'"></td>				
+			<td>&pound<input type = "text" class = "inputtext" name = "eadins'.$b.'" id = "eadins'.$b.'" value = "'.$eadins.'"></td></tr>';
 		};
 			echo '</table><br>';
 }
-function table_populate()
+function table_populate($inputdata, $x)
 {	$bwidths = array(10,20,30,40,50,100);
 	$margins = array('l' => 'Low Margin', 'm' => 'Medium Margin', 'h' => 'High Margin');
 	$years = array(1,2,3,4,5);
 	$marginindex = array('l', 'm', 'h');
 	$supp = array("ttb", "bts", "btp", "ead", "spd");
 
-	global $quotearray;
+	
 				//echo "QUOTEARRAY: <br>";
-			//print_r($quotearray);
+			//print_r($inputdata);
 	foreach ($marginindex as $m)
-	{echo '<br><table><tr>
+	{echo $x.'martable<br><table id = "'.$x.$m.'table" class = "'.$x.'martable"><tr>
 			<th class = "side">'.$margins[$m].'</th>
 			<th class = "ttb" colspan = "2"><label>TTB</label></th>
 			<th class = "bt" colspan = "2"><label>BT 21CN Standard</label></th>
@@ -142,39 +142,46 @@ function table_populate()
 			';}
 
 		foreach ($bwidths as $bdw)
-		{	global $quotearray;
-/*			echo $bdw;
-			echo "<br> BWSWWS: ";
-			print_r($quotearray[$bdw]['ttb']['l']);*/
+		{	
 			echo '<tr>
 			<th class = "side">'.$bdw.' Mbps</th>';
-			foreach ($supp as $s){ 
+			foreach ($supp as $s)
+			{ 
+
 				$yrs = array(1, 3);
 
 				foreach ($yrs as $ys)
-				{	global $bdw;
+				{
 					$y1 = $m.$ys;
 					$sub1 = '--';
 					if ($bdw == "")
-					{$bdw = 10;}
-					if (isset($quotearray[$bdw])){
-					if (array_key_exists($s, $quotearray[$bdw])){
-					//echo "bws: ".$bwnums[$s][$y1]." ";
-					if ($quotearray[$bdw][$s][$y1]!= "") 
 					{
-						$sub1 = $quotearray[$bdw][$s][$y1];
-					} 
-					else 
-					{
-						$sub1 = '  --';
+						$bdw = 10;
 					}
-				}}
-				else {$sub1 = '  --';}
-					echo'<td class = "'.$s.'i'.$ys.'">£<input type = "text" name = "'.$s.$y1.$bdw.'" value = "'.$sub1.'" class = "'.$s.'i'.$ys.'" ></td>'."\n";
-				}
+					//echo "DATA".$bdw;
+					//print_r($inputdata[$bdw]['ttb']);
+					if (isset($inputdata[$bdw]))
+					{
+						if (array_key_exists($s, $inputdata[$bdw]))
+						{
+							//echo "bws: ".$bwnums[$s][$y1]." ";
+							if ($inputdata[$bdw][$s][$y1]!= "") 
+							{
+								$sub1 = $inputdata[$bdw][$s][$y1];
+							} 
+							else 
+							{
+								$sub1 = '  ---';
+							}
+							//echo "keyexists";
+						}//echo "is set";
+					}
+					else {$sub1 = '  -';}
 
-		};
+					echo'<td class = "'.$s.'i'.$ys.'">&pound '.$sub1.'</td>'."\n";
+				}
+			};
 		echo "</tr>";}
 		echo '</table><br>';
 	}
-	}
+}

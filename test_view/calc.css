@@ -20,7 +20,21 @@ table
 {
 	border-collapse: collapse;
 }
-input[type="text"]
+
+.0martable
+{
+	position: relative;
+	top: 50px;
+
+}
+.1martable
+{
+	position: relative;
+	top: 100px;
+	left: 700px;
+
+}
+.inputtext
 {
 	border:0px;
 	width:90px;
@@ -52,9 +66,19 @@ input[type="text"]
 	background: rgb(128,100,162);
 }
 
+.baseinput
+{
+	border:1px solid rgb(171, 173, 179);
+	width: 60px;
+	padding: 2px;
+
+}
+
+
+
 #title10mbs, #title20mbs, #title30mbs, #title40mbs, #title50mbs, #title100mbs
 {
-	font-weight:bold;
+	font-weight: bold;
 }
 
 #title

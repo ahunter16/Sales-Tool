@@ -12,20 +12,35 @@
 	<body>
 
 		<form action = "" method = "post" id = "inputform">
+			<?php basevals(); ?>
 			<br><br>
+
 			<table>
 
 				<?php tablegenerate();?>
 			</table>
-			<input type = "submit" Value = "Calculate">
-			<input type = "button" value = "Clear" onclick = "clearinput()">
+			<label class = "martable" >Fill all Price Cells With: <input type = "text" ></label> 
+			<br>
+			<input class = "martable" type = "submit" Value = "Calculate">
+			<input class = "martable" type = "button" value = "Clear" onclick = "clearinput()">
+
+			<br>
 
 		</form>
 		<br>
-	 <br>
-		<?php table_populate(); ?>
+	 	<br>
+	 	<label class = "martable"><strong>Calculated Prices Using Active Base Values (Default):</strong></label>
+	 	<br>
+		<?php global $quotearray;
+		global $testarray;
+		$x = 0;
+		table_populate($quotearray, $x); 
+		echo "<br>";
+		//print_r($testarray);
+		$x = 1;
+		table_populate($testarray, $x);?>
 		
-		
+		<br><br><br>
 		<script>
 		function formsub()
 		{
