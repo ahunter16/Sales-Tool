@@ -11,23 +11,12 @@
 	<hr>
 	<body>
 	<div id = "bases">
-		<br><label id = "title">Active Base Values:</label><br>
-<!-- 		<div id = "basehist">View/Update Base Values for:
-			<form action = "basehistory" method = "get">
-			<select id = "bwidth" name = "bwidth">
-					<option value = "10">10</option>
-					<option value = "20">20</option>
-					<option value = "30">30</option>
-					<option value = "40">40</option>
-					<option value = "50">50</option>
-					<option value = "100">100</option>
-				</select> Mb/s 
-				<input type = "submit" Value = "Go">
-			</form> -->
+		<br><label id = "title">View/Modify Active Base Values:</label><br>
+
 
 		</div>
 		<div id = "bvform">
-				<form action = "" method = "post">
+				<form action = "?" method = "post">
 					<br>
 				<input type = "submit" value = "Submit">
 				<br>

@@ -44,7 +44,9 @@ foreach ($modbasevals as &$modtable)
 	echo'<tr>';
 	$tablerows = '';
 	$tablekeys = array_keys($modtable);
+	$ki = 0;
 	foreach ($tablekeys as $key)
+		
 		{	
 
 			if ( $key == 'Base_ID' || $key =='Last_Updated')
@@ -55,10 +57,15 @@ foreach ($modbasevals as &$modtable)
 			{
 				$insert = '<input name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "hidden" value = "'.$modtable[$key].'" style = "width: 70px;">'.$modtable[$key];
 			}
-			else
+			elseif ($ki >= 3 &&$ki < 10)
 			{
-				$insert = '<input name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "text" value = "'.$modtable[$key].'" style = "width: 70px;">';
+				$insert = '£ <input name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "text" value = "'.$modtable[$key].'" style = "width: 70px;">';
 			}
+			else 
+			{
+				$insert = '<input name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "text" value = "'.$modtable[$key].'" style = "width: 70px;"> %';
+			}
+			$ki += 1;
 			$tablerows .= '<td>'.$insert.'</td>'."\n";
 		}
 	$i += 1;

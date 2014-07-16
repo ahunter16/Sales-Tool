@@ -1,8 +1,20 @@
 <?php
 
 include '../dblogin.php';
+$page = substr($_SERVER['REQUEST_URI'], -1);
+$reredirect = 0;
+if ($page == "?")
+{
+	header("Location: redirect");
+	$reredirect = 1;
+}
+/*if ($reredirect == 1)
+{
+	header("Location: ../base_values");
+	$reredirect = 0;
+}*/
 
-
+$mbps = array(10,20,30,40,50,100);
 $unset = 0;
 include 'form.html.php';
 if (!empty($_POST))
@@ -15,84 +27,54 @@ if (!empty($_POST))
 		}
 	}	
 }
-echo "<br><br><br><br>";
-print_r($_POST);
+//echo "<br><br><br><br>";
+//echo "<br> POST: ";
+//print_r($_POST);
+
+
 if ($unset == 0)
 {
 	$sql = 'INSERT INTO sales.base_value SET ';
-
+	$baseinsert = array();
 	foreach ($tablekeys as $key)
 		{	
-			$baseinsert = array();
-			if ( $key != 'Base_ID' || $key !='Last_Updated')
+			
+			if ( substr($key, -7) != 'Base_ID' && substr($key, -12) !='Last_Updated')
 			{
 				$sql .= $key.' = :'.$key.', ';
 				$baseinsert[] = $key;
 			}
 		}
+
+	//echo "<br><br> KEYS";
+	//print_r($baseinsert);
 	$sql = rtrim($sql, ", ");
-
-	try
+	//print_r($bandwidths);
+	if (!empty($_POST))
 	{
-        $s = $pdo -> prepare($sql);
-        foreach ($baseinsert as $colname)
-        {
-        	$s -> bindValue(':'.$colname, $_POST[$colname]);
-        }
-        $s -> execute();
-        $output = 'Table updated successfully.';
-        include 'output.html.php';
-	}
+		foreach ($mbps as $b)
+		{
+			try
+			{	echo $b;
+		        $s = $pdo -> prepare($sql);
+		        foreach ($baseinsert as $colname)
+		        {
+		        	$s -> bindValue(':'.$colname, $_POST[$b.$colname]);
+		        }
+		        $s -> execute();
+		        $output = 'Table updated successfully.';
+		        //include 'output.html.php';
+			}
 
-    catch (PDOException $e)
-    {
-        $output = 'Error updating '.$key. ' or '.$colname.' field of base_values table:' . $e->getMessage();
-        include'output.html.php';
-        echo $sql;
-        exit();
-    }
+		    catch (PDOException $e)
+		    {
+		        $output = 'Error updating '.$key. ' or '.$colname.' field of base_values table:' . $e->getMessage();
+		        include'output.html.php';
+		        echo $sql;
+		        exit();
+		    }
+		}
+	}
 }
 
-/*$IDcheck = 0;
-if (isset($_POST['internet_bandwidth']))
-	{ echo "issettest";
-		print_r($_POST);
-		$baseinsert = array();
-		$sql = 'INSERT INTO sales.base_values10 SET ';
-		foreach (array_keys($modbasevals) as $arindex)//{
-		  //if (isset($_POST[$arindex])){
-			{if ($IDcheck ==1 && $arindex != 'last_updated')
-				{
-					$sql = $sql . $arindex.'= :'.$arindex.', ';
-					$baseinsert[] = $arindex	;
-				}
-			$IDcheck = 1;
-			}
-			$sql = rtrim($sql, ", ");
-			
-	    try
-	    {	
-	        $s = $pdo -> prepare($sql);
-	        foreach ($baseinsert as $colname)
-	        {
-	    		if ($colname != 'last_updated')
-	    		{
-	        		$s -> bindValue(':'.$colname, $_POST[$colname]);
-	        	}
-	        }
-
-	        $s -> execute();
-	        $output = 'Table updated successfully.';
-	        include 'output.html.php';
-	    }
-
-	    catch (PDOException $e)
-	    {
-	        $output = 'Error updating '.$arindex. ' or '.$colname.' field of base_values table:' . $e->getMessage();
-	        include'output.html.php';
-	        echo $sql;
-	        exit();
-	    }
-
-}*/
 ?>
