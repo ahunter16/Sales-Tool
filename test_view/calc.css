@@ -2,6 +2,7 @@ table, th
 {
 	border: 1px solid black;
 	padding: 5px;
+
 }
 td
 {
@@ -12,28 +13,75 @@ td
 hr
 {
 	height: 2px;
-
 	color: rgb(0,0,100);
 }
 
 table 
-{
+{	
+	table-layout: fixed;
 	border-collapse: collapse;
 }
 
-.0martable
+.martable0t
 {
-	position: relative;
-	top: 50px;
+	position: absolute;
+	top:940px;
+}
+.martable1t
+{
+	position: absolute;
+	top: 940px;
+	left: 1300px;
+}
+.martable0l
+{
+	position: absolute;
+	top: 980px;
 
 }
-.1martable
+
+.martable0m
 {
-	position: relative;
-	top: 100px;
-	left: 700px;
+	position: absolute;
+	top: 1260px;
+
 
 }
+.martable0h
+{
+	position: absolute;
+	top: 1540px;
+
+
+}
+.martable1l
+{
+	position: absolute;
+	top: 980px;
+	left: 1300px;
+
+}
+
+.martable1m
+{
+	position: absolute;
+	top: 1260px;
+	left: 1300px;
+
+}
+.martable1h
+{
+	position: absolute;
+	top: 1540px;
+	left: 1300px;
+
+}
+
+td.martable0l
+{
+	width: 200px;
+}
+
 .inputtext
 {
 	border:0px;

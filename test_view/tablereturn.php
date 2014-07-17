@@ -30,88 +30,50 @@ function tablegenerate ()
 	<th class = "ead">Install</th>
 	</tr>';
 
+		$fields = array('ttbann','ttb1yr','ttb3yr','wayann','wayann','way1yr','way3yr','btsann','btpann','eadann','eadins','eadins');
 
 		foreach ($bwidths as $b)
-		{ 
-			if (isset($_POST['ttbann'.$b]) && $_POST['ttbann'.$b] != "" )
+		{	
+			$fieldnames = array(); 
+			foreach($fields as $f)
 			{
-				$ttbann = $_POST['ttbann'.$b];
+				if (!empty($_POST[$f.$b]))
+				{
+					$fieldnames[$f] = $_POST[$f.$b];
+				}
+				else
+				{
+					$fieldnames[$f] = "";
+				}
+			}
 
-			}
-			else {$ttbann = "";}
-			if (isset($_POST['ttb1yr'.$b]) && $_POST['ttb1yr'.$b] != "" )
+			if (!empty($fieldnames['wayann']) || !empty($fieldnames['btsann']) || !empty($fieldnames['btpann']))
 			{
-				$ttb1yr = ($_POST['ttb1yr'.$b]);
-			}
-			else {$ttb1yr = "";}
-			if (isset($_POST['ttb3yr'.$b]) && $_POST['ttb3yr'.$b] != "" )
-			{
-				$ttb3yr = ($_POST['ttb3yr'.$b]);
-			}
-			else {$ttb3yr = "";}
-			if (isset($_POST['wayann'.$b]) && $_POST['wayann'.$b] != "" )
-			{
-				$wayann = ($_POST['wayann'.$b]);
-			}
-			else {$wayann = "";}
-			if (isset($_POST['way1yr'.$b]) && $_POST['way1yr'.$b] != "" )
-			{
-				$way1yr = ($_POST['way1yr'.$b]);
-			}
-			else {$way1yr = "";}
-			if (isset($_POST['way3yr'.$b]) && $_POST['way3yr'.$b] != "" )
-			{
-				$way3yr = ($_POST['way3yr'.$b]);
-			}
-			else {$way3yr = "";}
-			if (isset($_POST['btsann'.$b]) && $_POST['btsann'.$b] != "" )
-			{
-				$btsann = ($_POST['btsann'.$b]);
-			}
-			else {$btsann = "";}
-			if (isset($_POST['btpann'.$b]) && $_POST['btpann'.$b] != "" )
-			{
-				$btpann = ($_POST['btpann'.$b]);
-			}
-			else {$btpann = "";}
-			if (isset($_POST['eadann'.$b]) && $_POST['eadann'.$b] != "" )
-			{
-				$eadann = ($_POST['eadann'.$b]);
-			}
-			else {$eadann = "";}
-			if (isset($_POST['eadins'.$b]) && $_POST['eadins'.$b] != "" )
-			{
-				$eadins = ($_POST['eadins'.$b]);
-			}
-			else {$eadins = "";}
-
-			if (!empty($wayann) || !empty($btsann) || !empty($btpann))
-			{
-				$btstot = $wayann + $btsann;
-				$btptot = $wayann + $btpann;
+				$fieldnames['btstot'] = $fieldnames['wayann'] + $fieldnames['btsann'];
+				$fieldnames['btptot'] = $fieldnames['wayann'] + $fieldnames['btpann'];
 			}
 			else 
 			{
-				$btstot = "";
-				$btptot = "";
+				$fieldnames['btstot'] = "";
+				$fieldnames['btptot'] = "";
 			}
 
 		//echo "ttbann".$b." ".$ttbann;
 			//onblur = "formsub()"
 		echo '<tr>
 			<th class = "side">'.$b.'</th>
-			<td>&pound<input type = "text" class = "inputtext" name = "ttbann'.$b.'" id = "ttbann'.$b.'" value = "'.$ttbann.'"></td>
-			<td>&pound<input type = "text" class = "inputtext" name = "ttb1yr'.$b.'" id = "ttb1yr'.$b.'" value = "'.$ttb1yr.'"></td>
-			<td>&pound<input type = "text" class = "inputtext" name = "ttb3yr'.$b.'" id = "ttb3yr'.$b.'" value = "'.$ttb3yr.'"></td>
-			<td>&pound<input type = "text" class = "inputtext" name = "wayann'.$b.'" id = "wayann'.$b.'" value = "'.$wayann.'"></td>
-			<td>&pound<input type = "text" class = "inputtext" name = "way1yr'.$b.'" id = "way1yr'.$b.'" value = "'.$way1yr.'"></td>
-			<td>&pound<input type = "text" class = "inputtext" name = "way3yr'.$b.'" id = "way3yr'.$b.'" value = "'.$way3yr.'"></td>
-			<td>&pound<input type = "text" class = "inputtext" name = "btsann'.$b.'" id = "btsann'.$b.'" value = "'.$btsann.'" onblur = "ewayadd()"></td>
-			<td class = "btsi1" >&pound<label id = "btstot'.$b.'">'.$btstot.'</label></input></td>
-			<td>&pound<input type = "text" class = "inputtext" name = "btpann'.$b.'" id = "btpann'.$b.'" value = "'.$btpann.'" onblur = "ewayadd()"></td>
-			<td class = "btsi1" >&pound<label  id = "btptot'.$b.'">'.$btptot.'</label></td>	
-			<td>&pound<input type = "text" class = "inputtext" name = "eadann'.$b.'" id = "eadann'.$b.'" value = "'.$eadann.'"></td>				
-			<td>&pound<input type = "text" class = "inputtext" name = "eadins'.$b.'" id = "eadins'.$b.'" value = "'.$eadins.'"></td></tr>';
+			<td>&pound<input type = "text" class = "inputtext" name = "ttbann'.$b.'" id = "ttbann'.$b.'" value = "'.$fieldnames["ttbann"].'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "ttb1yr'.$b.'" id = "ttb1yr'.$b.'" value = "'.$fieldnames["ttb1yr"].'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "ttb3yr'.$b.'" id = "ttb3yr'.$b.'" value = "'.$fieldnames["ttb3yr"].'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "wayann'.$b.'" id = "wayann'.$b.'" value = "'.$fieldnames["wayann"].'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "way1yr'.$b.'" id = "way1yr'.$b.'" value = "'.$fieldnames["way1yr"].'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "way3yr'.$b.'" id = "way3yr'.$b.'" value = "'.$fieldnames["way3yr"].'"></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "btsann'.$b.'" id = "btsann'.$b.'" value = "'.$fieldnames["btsann"].'" onblur = "ewayadd()"></td>
+			<td class = "btsi1" >&pound<label id = "btstot'.$b.'">'.$fieldnames["btstot"].'</label></input></td>
+			<td>&pound<input type = "text" class = "inputtext" name = "btpann'.$b.'" id = "btpann'.$b.'" value = "'.$fieldnames["btpann"].'" onblur = "ewayadd()"></td>
+			<td class = "btsi1" >&pound<label  id = "btptot'.$b.'">'.$fieldnames["btptot"].'</label></td>	
+			<td>&pound<input type = "text" class = "inputtext" name = "eadann'.$b.'" id = "eadann'.$b.'" value = "'.$fieldnames["eadann"].'"></td>				
+			<td>&pound<input type = "text" class = "inputtext" name = "eadins'.$b.'" id = "eadins'.$b.'" value = "'.$fieldnames["eadins"].'"></td></tr>';
 		};
 			echo '</table><br>';
 }
@@ -126,7 +88,7 @@ function table_populate($inputdata, $x)
 				//echo "QUOTEARRAY: <br>";
 			//print_r($inputdata);
 	foreach ($marginindex as $m)
-	{echo $x.'martable<br><table id = "'.$x.$m.'table" class = "'.$x.'martable"><tr>
+	{echo '<table id = "'.$x.$m.'table" class = "martable'.$x.$m.'"><tr>
 			<th class = "side">'.$margins[$m].'</th>
 			<th class = "ttb" colspan = "2"><label>TTB</label></th>
 			<th class = "bt" colspan = "2"><label>BT 21CN Standard</label></th>
@@ -171,17 +133,17 @@ function table_populate($inputdata, $x)
 							} 
 							else 
 							{
-								$sub1 = '  ---';
+								$sub1 = '  --';
 							}
 							//echo "keyexists";
 						}//echo "is set";
 					}
-					else {$sub1 = '  -';}
+					else {$sub1 = '  --';}
 
-					echo'<td class = "'.$s.'i'.$ys.'">&pound '.$sub1.'</td>'."\n";
+					echo'<td id = "'.$s.$y1.$bdw.$x.'"class = "'.$s.'i'.$ys.'" onmouseenter = "cellhighlight(this)" onmouseleave = "cellunhighlight(this)">&pound '.$sub1.'</td>'."\n";
 				}
 			};
 		echo "</tr>";}
 		echo '</table><br>';
-	}
+	}echo'<br><br><br>';
 }

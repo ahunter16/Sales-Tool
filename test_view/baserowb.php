@@ -9,7 +9,7 @@ function basevals()
 	{
 		try
 		{
-			$modbasequery = 'SELECT * FROM sales.base_value WHERE Bandwidth_Mbps = '.$b.' ORDER BY last_updated DESC LIMIT 1';
+			$modbasequery = 'SELECT * FROM sales.base_value AS b WHERE b.Bandwidth_Mbps = '.$b.' ORDER BY last_updated DESC LIMIT 1';
 			$modstmt = $pdo->query($modbasequery);
 			$modresult = $modstmt->setFetchMode(PDO::FETCH_ASSOC);
 		}
@@ -21,8 +21,7 @@ function basevals()
 		    exit();
 		}
 		while ($modrow = $modstmt->fetch())
-		{	
-
+		{
 			$modbasevals[] = $modrow;
 		}
 		
@@ -41,59 +40,36 @@ function basevals()
 		echo $tablehead;
 	}
 	echo '<form>';
-
-
-tabledefine($modbasevals[0]);
-$tablekeys = array_keys($modbasevals[0]); //fields
-
-
-foreach (array(0,1,2,3,4,5) as $b)
-{	
-	$fieldnames = array(); 
-	foreach($tablekeys as $f)
-	{$bwidths = array(10,20,30,40,50,100);
-		if (!empty($_POST[$bwidths[$b].$f]) && $f !='Base_ID' && $f != 'Last_Updated')
-		{
-			$fieldval[$f] = $_POST[$bwidths[$b].$f];
-		}
-	}
-}
-
 	$i = 0;
+	tabledefine($modbasevals[0]);
 	foreach ($modbasevals as &$modtable)
 	{	
 		echo'<tr>';
 		$tablerows = '';
+		$tablekeys = array_keys($modtable);
 		$ki = 0;
 		foreach ($tablekeys as $key)
+			
 			{	
-				/*if (!empty($fieldval[$key]))
-				{
-					$active = $fieldval[$key];
-				}
-				else
-				{*/
-					$active = $modtable[$key];
-				
+
 				if ( $key == 'Base_ID' || $key =='Last_Updated')
 				{
 					$insert = $modtable[$key];
 				}
 				elseif ($key == 'Bandwidth_Mbps')
 				{
-					$insert = '<input id = "'.$modtable['Bandwidth_Mbps'].$key.'" name = "'.$modtable['Bandwidth_Mbps'].$key.'" type = "hidden" placeholder = "'.$modtable[$key].'"value = "'.$active.'" >'.$active;
+					$insert = '<input name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "hidden" value = "'.$modtable[$key].'" >'.$modtable[$key];
 				}
 				elseif ($ki >= 3 &&$ki < 10)
 				{
-					$insert = '&pound <input class = "baseinput" id = "'.$modtable['Bandwidth_Mbps'].$key.'" name = "'.$modtable['Bandwidth_Mbps'].$key.' "type = "text" placeholder = "'.$modtable[$key].'"value = "'.$active.'" >';
+					$insert = '&pound <input class = "baseinput" name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "text" value = "'.$modtable[$key].'" >';
 				}
-				else
+				else 
 				{
-					$insert = '<input class = "baseinput" id = "'.$modtable['Bandwidth_Mbps'].$key.'" name = "'.$modtable['Bandwidth_Mbps'].$key.' "type = "text" placeholder = "'.$modtable[$key].'"value = "'.$active.'" > %';
+					$insert = '<input class = "baseinput" name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "text" value = "'.$modtable[$key].'" > %';
 				}
 				$ki += 1;
-
-					$tablerows .= '<td>'.$insert.'</td>'."\n";
+				$tablerows .= '<td>'.$insert.'</td>'."\n";
 			}
 		$i += 1;
 		echo $tablerows;
