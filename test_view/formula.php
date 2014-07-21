@@ -5,7 +5,7 @@
 
 
 function calculate($base, $f /*$cost, */)
-{	//print_r($base['Discount']);
+{	print_r($base);
 	echo " NEW";
 	global $eadcheck;
 	global $spdcheck;

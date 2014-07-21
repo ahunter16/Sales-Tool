@@ -44,31 +44,40 @@ foreach ($bandwidths as $bw)
 			$quotearray[$bw] = formfill($basevals, $bw);
 
 		//print_r($_POST);
-		$comleteform = 1;
+		
 
-
+		//print_r($basekeys);
 		foreach ($basekeys as $bk)			//using form values as base values, stops on blank cell
-		{	//echo $bw;
+		{	/*echo "BASEKEY".$bk;*/
 			if (empty($_POST[$bw.$bk]))
 			{
 				$completeform = 0;
+				$baseformval[$bk] = "BLANK";
 			}
-			else 
+			else if(!empty($_POST[$bw.$bk."_"])) 
+			{
+				$baseformval[$bk] = $_POST[$bw.$bk."_"];
+				echo "IT HAPPENED";
+			}
+			else
 			{
 				$baseformval[$bk] = $_POST[$bw.$bk];
 			}
+
 		}
-		if ($completeform == 1);
+		if (is_null($completeform));
 		{	
-			echo "BASE ";
-			print_r($baseformval);
-			echo "END ";
+
 			$testarray[$bw] = formfill($baseformval, $bw);
 		}
+		echo "complete".$completeform;
 	}
 
 }	//print_r($testarray);
 //echo "TEST";
+
+
+
 
 
 include 'form.html.php';
@@ -143,5 +152,6 @@ function formfill($baseformval, $bw)
 	return($testcost);
 
 }
-
-
+echo "BASE ";
+print_r($_POST);
+echo "END ";

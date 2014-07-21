@@ -42,6 +42,7 @@ function basevals()
 	echo '<form>';
 	$i = 0;
 	tabledefine($modbasevals[0]);
+	
 	foreach ($modbasevals as &$modtable)
 	{	
 		echo'<tr>';
@@ -58,15 +59,15 @@ function basevals()
 				}
 				elseif ($key == 'Bandwidth_Mbps')
 				{
-					$insert = '<input name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "hidden" value = "'.$modtable[$key].'" >'.$modtable[$key];
+					$insert = '<input name = "'.$modtable['Bandwidth_Mbps'].$key.'" type = "hidden" value = "'.$modtable[$key].'" >'.$modtable[$key];
 				}
 				elseif ($ki >= 3 &&$ki < 10)
 				{
-					$insert = '&pound <input class = "baseinput" name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "text" value = "'.$modtable[$key].'" >';
+					$insert = '&pound <input class = "baseinput" name = "'.$modtable['Bandwidth_Mbps'].$key.'" type = "text" value = "'.$modtable[$key].'" >';
 				}
 				else 
 				{
-					$insert = '<input class = "baseinput" name = "'.$modtable['Bandwidth_Mbps'].$key.'"type = "text" value = "'.$modtable[$key].'" > %';
+					$insert = '<input class = "baseinput" name = "'.$modtable['Bandwidth_Mbps'].$key.'" type = "text" value = "'.$modtable[$key].'" > %';
 				}
 				$ki += 1;
 				$tablerows .= '<td>'.$insert.'</td>'."\n";
