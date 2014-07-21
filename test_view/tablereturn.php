@@ -1,12 +1,12 @@
 <?php
 mb_internal_encoding("UTF-8");
-function tablegenerate ()
+function Tablegenerate ()
 {	$bwidths = array(10,20,30,40,50,100);
 	$margins = array('Low Margin', 'Medium Margin', 'High Margin');
 	$years = array(1,2,3,4,5);
 
 	echo 
-	'<br><br><br><table id = "entryfield" class = "0martable"><tr>
+	'<table><tr>
 	<th class = "side">Supplier</th>
 	<th class = "ttb" colspan = "3">TalkTalk Business</th>
 	<th class = "bt" colspan = "3">BT 21CN Etherway</th>
@@ -62,6 +62,7 @@ function tablegenerate ()
 			//onblur = "formsub()"
 		echo '<tr>
 			<th class = "side">'.$b.'</th>
+<<<<<<< HEAD
 			<td>&pound<input type = "text" class = "inputtext" name = "ttbann'.$b.'" id = "ttbann'.$b.'" value = "'.$fieldnames["ttbann"].'"></td>
 			<td>&pound<input type = "text" class = "inputtext" name = "ttb1yr'.$b.'" id = "ttb1yr'.$b.'" value = "'.$fieldnames["ttb1yr"].'"></td>
 			<td>&pound<input type = "text" class = "inputtext" name = "ttb3yr'.$b.'" id = "ttb3yr'.$b.'" value = "'.$fieldnames["ttb3yr"].'"></td>
@@ -74,21 +75,39 @@ function tablegenerate ()
 			<td class = "btsi1" >&pound<label  id = "btptot'.$b.'">'.$fieldnames["btptot"].'</label></td>	
 			<td>&pound<input type = "text" class = "inputtext" name = "eadann'.$b.'" id = "eadann'.$b.'" value = "'.$fieldnames["eadann"].'"></td>				
 			<td>&pound<input type = "text" class = "inputtext" name = "eadins'.$b.'" id = "eadins'.$b.'" value = "'.$fieldnames["eadins"].'"></td></tr>';
+=======
+			<td>£<input type = "text" class = "inputtext" name = "ttbann'.$b.'" id = "ttbann'.$b.'" value = "'.$ttbann.'"></td>
+			<td>£<input type = "text" class = "inputtext" name = "ttb1yr'.$b.'" id = "ttb1yr'.$b.'" value = "'.$ttb1yr.'"></td>
+			<td>£<input type = "text" class = "inputtext" name = "ttb3yr'.$b.'" id = "ttb3yr'.$b.'" value = "'.$ttb3yr.'"></td>
+			<td>£<input type = "text" class = "inputtext" name = "wayann'.$b.'" id = "wayann'.$b.'" value = "'.$wayann.'"></td>
+			<td>£<input type = "text" class = "inputtext" name = "way1yr'.$b.'" id = "way1yr'.$b.'" value = "'.$way1yr.'"></td>
+			<td>£<input type = "text" class = "inputtext" name = "way3yr'.$b.'" id = "way3yr'.$b.'" value = "'.$way3yr.'"></td>
+			<td>£<input type = "text" class = "inputtext" name = "btsann'.$b.'" id = "btsann'.$b.'" value = "'.$btsann.'" onblur = "ewayadd()"></td>
+			<td class = "btsi1" >£<label id = "btstot'.$b.'">'.$btstot.'</label></input></td>
+			<td>£<input type = "text" class = "inputtext" name = "btpann'.$b.'" id = "btpann'.$b.'" value = "'.$btpann.'" onblur = "ewayadd()"></td>
+			<td class = "btsi1" >£<label  id = "btptot'.$b.'">'.$btptot.'</label></td>	
+			<td>£<input type = "text" class = "inputtext" name = "eadann'.$b.'" id = "eadann'.$b.'" value = "'.$eadann.'"></td>				
+			<td>£<input type = "text" class = "inputtext" name = "eadins'.$b.'" id = "eadins'.$b.'" value = "'.$eadins.'"></td></tr>';
+>>>>>>> parent of 6bf7399... base development mode added
 		};
 			echo '</table><br>';
 }
-function table_populate($inputdata, $x)
+function table_populate()
 {	$bwidths = array(10,20,30,40,50,100);
 	$margins = array('l' => 'Low Margin', 'm' => 'Medium Margin', 'h' => 'High Margin');
 	$years = array(1,2,3,4,5);
 	$marginindex = array('l', 'm', 'h');
 	$supp = array("ttb", "bts", "btp", "ead", "spd");
 
-	
+	global $quotearray;
 				//echo "QUOTEARRAY: <br>";
-			//print_r($inputdata);
+			//print_r($quotearray);
 	foreach ($marginindex as $m)
+<<<<<<< HEAD
 	{echo '<table id = "'.$x.$m.'table" class = "martable'.$x.$m.'"><tr>
+=======
+	{echo '<br><table><tr>
+>>>>>>> parent of 6bf7399... base development mode added
 			<th class = "side">'.$margins[$m].'</th>
 			<th class = "ttb" colspan = "2"><label>TTB</label></th>
 			<th class = "bt" colspan = "2"><label>BT 21CN Standard</label></th>
@@ -104,26 +123,31 @@ function table_populate($inputdata, $x)
 			';}
 
 		foreach ($bwidths as $bdw)
-		{	
+		{	global $quotearray;
+/*			echo $bdw;
+			echo "<br> BWSWWS: ";
+			print_r($quotearray[$bdw]['ttb']['l']);*/
 			echo '<tr>
 			<th class = "side">'.$bdw.' Mbps</th>';
-			foreach ($supp as $s)
-			{ 
-
+			foreach ($supp as $s){ 
 				$yrs = array(1, 3);
 
 				foreach ($yrs as $ys)
-				{
+				{	global $bdw;
 					$y1 = $m.$ys;
 					$sub1 = '--';
 					if ($bdw == "")
+					{$bdw = 10;}
+					if (isset($quotearray[$bdw])){
+					if (array_key_exists($s, $quotearray[$bdw])){
+					//echo "bws: ".$bwnums[$s][$y1]." ";
+					if ($quotearray[$bdw][$s][$y1]!= "") 
 					{
-						$bdw = 10;
-					}
-					//echo "DATA".$bdw;
-					//print_r($inputdata[$bdw]['ttb']);
-					if (isset($inputdata[$bdw]))
+						$sub1 = $quotearray[$bdw][$s][$y1];
+					} 
+					else 
 					{
+<<<<<<< HEAD
 						if (array_key_exists($s, $inputdata[$bdw]))
 						{
 							//echo "bws: ".$bwnums[$s][$y1]." ";
@@ -141,9 +165,22 @@ function table_populate($inputdata, $x)
 					else {$sub1 = '  --';}
 
 					echo'<td id = "'.$s.$y1.$bdw.$x.'"class = "'.$s.'i'.$ys.'" onmouseenter = "cellhighlight(this)" onmouseleave = "cellunhighlight(this)">&pound '.$sub1.'</td>'."\n";
+=======
+						$sub1 = '  --';
+					}
+				}}
+				else {$sub1 = '  --';}
+					echo'<td class = "'.$s.'i'.$ys.'">£<input type = "text" name = "'.$s.$y1.$bdw.'" value = "'.$sub1.'" class = "'.$s.'i'.$ys.'" ></td>'."\n";
+>>>>>>> parent of 6bf7399... base development mode added
 				}
-			};
+
+		};
 		echo "</tr>";}
 		echo '</table><br>';
+<<<<<<< HEAD
 	}echo'<br><br><br>';
 }
+=======
+	}
+	}
+>>>>>>> parent of 6bf7399... base development mode added

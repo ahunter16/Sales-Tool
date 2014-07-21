@@ -21,6 +21,7 @@ table
 	table-layout: fixed;
 	border-collapse: collapse;
 }
+<<<<<<< HEAD
 
 .martable0t
 {
@@ -83,6 +84,9 @@ td.martable0l
 }
 
 .inputtext
+=======
+input[type="text"]
+>>>>>>> parent of 6bf7399... base development mode added
 {
 	border:0px;
 	width:90px;
@@ -114,19 +118,9 @@ td.martable0l
 	background: rgb(128,100,162);
 }
 
-.baseinput
-{
-	border:1px solid rgb(171, 173, 179);
-	width: 60px;
-	padding: 2px;
-
-}
-
-
-
 #title10mbs, #title20mbs, #title30mbs, #title40mbs, #title50mbs, #title100mbs
 {
-	font-weight: bold;
+	font-weight:bold;
 }
 
 #title

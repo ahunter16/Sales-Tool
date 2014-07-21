@@ -14,13 +14,12 @@
 			<p> Unsupported</p>
 		</iframe> -->
 		<form action = "" method = "post" id = "inputform">
-			<?php basevals(); ?>
 			<br><br>
-
 			<table>
 
 				<?php tablegenerate();?>
 			</table>
+<<<<<<< HEAD
 			<label class = "martable" >Fill all Price Cells With: <input id = "fillcells" type = "text" onblur = "pricefill()"></label> 
 			<br>
 			<input class = "martable" type = "submit" Value = "Calculate">
@@ -43,6 +42,17 @@
 		table_populate($testarray, $x);?>
 		
 		
+=======
+			<input type = "submit" Value = "Calculate">
+			<input type = "button" value = "Clear" onclick = "clearinput()">
+
+		</form>
+		<br>
+	 <br>
+		<?php table_populate(); ?>
+		
+		
+>>>>>>> parent of 6bf7399... base development mode added
 		<script>
 
 		function pricefill()
